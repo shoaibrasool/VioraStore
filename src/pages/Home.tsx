@@ -85,7 +85,7 @@ const Home: React.FC = () => {
                 <h3 className="text-xl font-semibold mb-2">{product.name}</h3>
                 <p className="text-gray-600 mb-4">${product.price}</p>
                 <button
-                  onClick={() => addItem(product)}
+                  onClick={() => addItem({ ...product, quantity: 1 })}
                   className="w-full bg-black text-white py-2 px-4 rounded-md flex items-center justify-center gap-2 hover:bg-gray-800 transition-colors"
                 >
                   <ShoppingCart size={20} />

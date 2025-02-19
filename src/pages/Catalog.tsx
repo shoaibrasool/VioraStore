@@ -75,7 +75,7 @@ const Catalog: React.FC = () => {
                 <div className="flex items-center justify-between">
                   <span className="text-xl font-bold">${product.price}</span>
                   <button
-                    onClick={() => addItem(product)}
+                    onClick={() => addItem({ ...product, quantity: 1 })}
                     className="bg-black text-white py-2 px-4 rounded-md flex items-center gap-2 hover:bg-gray-800 transition-colors"
                   >
                     <ShoppingCart size={20} />

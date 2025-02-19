@@ -81,7 +81,7 @@ const ProductDetails: React.FC = () => {
             </div>
 
             <button
-              onClick={() => addItem(product)}
+              onClick={() => addItem({ ...product, quantity: 1 })}
               className="w-full bg-black text-white py-3 px-6 rounded-md flex items-center justify-center gap-2 hover:bg-gray-800 transition-colors"
             >
               <ShoppingCart size={20} />

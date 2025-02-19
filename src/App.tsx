@@ -20,7 +20,7 @@ function App() {
         <Navbar onMenuClick={() => setIsSidebarOpen(true)} />
         <AnimatePresence>
           {isSidebarOpen && (
-            <Sidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
+            <Sidebar onClose={() => setIsSidebarOpen(false)} />
           )}
         </AnimatePresence>
         <main className="pt-16">

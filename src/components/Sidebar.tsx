@@ -5,11 +5,10 @@ import { motion } from 'framer-motion';
 import { theme } from '../constants/theme';
 
 interface SidebarProps {
-  isOpen: boolean;
   onClose: () => void;
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
+const Sidebar: React.FC<SidebarProps> = ({ onClose }) => {
   const links = [
     { to: '/', label: 'Home' },
     { to: '/catalog', label: 'Catalog' },
