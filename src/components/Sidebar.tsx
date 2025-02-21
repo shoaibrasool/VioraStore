@@ -1,8 +1,8 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { X } from 'lucide-react';
-import { motion } from 'framer-motion';
-import { theme } from '../constants/theme';
+import React from "react";
+import { Link } from "react-router-dom";
+import { X } from "lucide-react";
+import { motion } from "framer-motion";
+import { theme } from "../constants/theme";
 
 interface SidebarProps {
   onClose: () => void;
@@ -10,22 +10,22 @@ interface SidebarProps {
 
 const Sidebar: React.FC<SidebarProps> = ({ onClose }) => {
   const links = [
-    { to: '/', label: 'Home' },
-    { to: '/catalog', label: 'Catalog' },
-    { to: '/contact', label: 'Contact' },
-    { to: '/about', label: 'About Us' },
+    { to: "/", label: "Home" },
+    { to: "/catalog", label: "Catalog" },
+    { to: "/contact", label: "Contact" },
+    { to: "/about", label: "About Us" },
   ];
 
   return (
     <motion.div
-      initial={{ x: '-100%' }}
+      initial={{ x: "-100%" }}
       animate={{ x: 0 }}
-      exit={{ x: '-100%' }}
-      transition={{ type: 'tween' }}
+      exit={{ x: "-100%" }}
+      transition={{ type: "tween" }}
       className="fixed inset-0 z-50"
     >
-      <div className="absolute inset-0 bg-black bg-opacity-50" onClick={onClose} />
-      <div className="absolute top-0 left-0 bottom-0 w-64 bg-white shadow-lg">
+      <div className="absolute inset-0" onClick={onClose} />
+      <div className="absolute top-0 left-0 bottom-0 w-64 bg-white shadow-2xl shadow-black">
         <div className="p-4 flex justify-between items-center border-b">
           <h2 className="text-xl font-bold">Menu</h2>
           <button onClick={onClose}>

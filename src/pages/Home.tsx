@@ -1,50 +1,73 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { ShoppingCart } from 'lucide-react';
-import { useCartStore } from '../store/cartStore';
-import { Product } from '../types';
+import React from "react";
+import { motion } from "framer-motion";
+import { ShoppingCart } from "lucide-react";
+import { useCartStore } from "../store/cartStore";
+import { Product } from "../types";
+import Sigma from "../assets/images/Sigma.jpeg";
+import DarkRebel from "../assets/images/Dark Rebel.jpeg";
+import Dynasty from "../assets/images/Dynasty.jpeg";
+import Genevieve from "../assets/images/Genevieve.jpeg";
+import Midnight from "../assets/images/Midnight.jpeg";
+import Mystique from "../assets/images/Mystique.jpeg";
+import Zephyr from "../assets/images/Zephyr.jpeg";
 
 const products: Product[] = [
   {
-    id: '1',
-    name: 'Midnight Rose',
-    description: 'A seductive blend of dark rose and vanilla',
+    id: "1",
+    name: "Sigma",
+    description: "A seductive blend of dark rose and vanilla",
     price: 129.99,
-    image: 'https://images.unsplash.com/photo-1588405748880-12d1d2a59f75?auto=format&fit=crop&q=80&w=800',
-    category: 'floral'
+    image: Sigma,
+    category: "floral",
   },
   {
-    id: '2',
-    name: 'Ocean Breeze',
-    description: 'Fresh marine notes with a hint of citrus',
+    id: "2",
+    name: "Dark Rebel",
+    description: "Fresh marine notes with a hint of citrus",
     price: 99.99,
-    image: 'https://images.unsplash.com/photo-1594035910387-fea47794261f?auto=format&fit=crop&q=80&w=800',
-    category: 'fresh'
+    image: DarkRebel,
+    category: "fresh",
   },
   {
-    id: '3',
-    name: 'Midnight Rose',
-    description: 'A seductive blend of dark rose and vanilla',
+    id: "3",
+    name: "Dynasty",
+    description: "A seductive blend of dark rose and vanilla",
     price: 129.99,
-    image: 'https://images.unsplash.com/photo-1588405748880-12d1d2a59f75?auto=format&fit=crop&q=80&w=800',
-    category: 'floral'
+    image: Dynasty,
+    category: "floral",
   },
   {
-    id: '4',
-    name: 'Ocean Breeze',
-    description: 'Fresh marine notes with a hint of citrus',
+    id: "4",
+    name: "Genevieve",
+    description: "Fresh marine notes with a hint of citrus",
     price: 99.99,
-    image: 'https://images.unsplash.com/photo-1594035910387-fea47794261f?auto=format&fit=crop&q=80&w=800',
-    category: 'fresh'
+    image: Genevieve,
+    category: "fresh",
   },
   {
-    id: '5',
-    name: 'Velvet Oud',
-    description: 'Rich and mysterious oriental fragrance',
+    id: "5",
+    name: "Midnight",
+    description: "Rich and mysterious oriental fragrance",
     price: 159.99,
-    image: 'https://images.unsplash.com/photo-1595425970377-c9703cf48b6f?auto=format&fit=crop&q=80&w=800',
-    category: 'oriental'
-  }
+    image: Midnight,
+    category: "oriental",
+  },
+  {
+    id: "6",
+    name: "Mystique",
+    description: "Rich and mysterious oriental fragrance",
+    price: 159.99,
+    image: Mystique,
+    category: "oriental",
+  },
+  {
+    id: "7",
+    name: "Zephyr",
+    description: "Rich and mysterious oriental fragrance",
+    price: 159.99,
+    image: Zephyr,
+    category: "oriental",
+  },
 ];
 
 const Home: React.FC = () => {
@@ -53,8 +76,13 @@ const Home: React.FC = () => {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <div className="relative h-[70vh] bg-cover bg-center" 
-           style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1596203721435-1de3622a9e0a?auto=format&fit=crop&q=80&w=2000)' }}>
+      <div
+        className="relative h-[70vh] bg-cover bg-center"
+        style={{
+          backgroundImage:
+            "url(https://www.viorafragrances.store/cdn/shop/files/WhatsApp_Image_2024-08-24_at_8.34.43_PM_f1fc6b87-3f81-4ce8-bfbd-b098624b547b.jpg?crop=center&v=1724513828&width=1920)",
+        }}
+      >
         <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -70,7 +98,9 @@ const Home: React.FC = () => {
 
       {/* Products Slider */}
       <div className="py-16 px-4 max-w-7xl mx-auto">
-        <h2 className="text-3xl font-bold mb-8 text-center">Featured Collections</h2>
+        <h2 className="text-3xl font-bold mb-8 text-center">
+          Featured Collections
+        </h2>
         <div className="flex overflow-x-auto gap-6 pb-4 hide-scrollbar">
           {products.map((product) => (
             <motion.div
@@ -80,7 +110,11 @@ const Home: React.FC = () => {
               whileHover={{ scale: 1.05 }}
               className="min-w-[280px] bg-white rounded-lg shadow-lg overflow-hidden"
             >
-              <img src={product.image} alt={product.name} className="w-full h-48 object-cover" />
+              <img
+                src={product.image}
+                alt={product.name}
+                className="w-full h-48 object-cover"
+              />
               <div className="p-4">
                 <h3 className="text-xl font-semibold mb-2">{product.name}</h3>
                 <p className="text-gray-600 mb-4">${product.price}</p>

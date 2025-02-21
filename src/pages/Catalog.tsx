@@ -1,51 +1,74 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { ShoppingCart } from 'lucide-react';
-import { Link } from 'react-router-dom';
-import { useCartStore } from '../store/cartStore';
-import { Product } from '../types';
+import React from "react";
+import { motion } from "framer-motion";
+import { ShoppingCart } from "lucide-react";
+import { Link } from "react-router-dom";
+import { useCartStore } from "../store/cartStore";
+import { Product } from "../types";
+import Sigma from "../assets/images/Sigma.jpeg";
+import DarkRebel from "../assets/images/Dark Rebel.jpeg";
+import Dynasty from "../assets/images/Dynasty.jpeg";
+import Genevieve from "../assets/images/Genevieve.jpeg";
+import Midnight from "../assets/images/Midnight.jpeg";
+import Mystique from "../assets/images/Mystique.jpeg";
+import Zephyr from "../assets/images/Zephyr.jpeg";
 
 const products: Product[] = [
   {
-    id: '1',
-    name: 'Midnight Rose',
-    description: 'A seductive blend of dark rose and vanilla',
+    id: "1",
+    name: "Sigma",
+    description: "A seductive blend of dark rose and vanilla",
     price: 129.99,
-    image: 'https://images.unsplash.com/photo-1588405748880-12d1d2a59f75?auto=format&fit=crop&q=80&w=800',
-    category: 'floral'
+    image: Sigma,
+    category: "floral",
   },
   {
-    id: '2',
-    name: 'Ocean Breeze',
-    description: 'Fresh marine notes with a hint of citrus',
+    id: "2",
+    name: "Dark Rebel",
+    description: "Fresh marine notes with a hint of citrus",
     price: 99.99,
-    image: 'https://images.unsplash.com/photo-1594035910387-fea47794261f?auto=format&fit=crop&q=80&w=800',
-    category: 'fresh'
+    image: DarkRebel,
+    category: "fresh",
   },
   {
-    id: '3',
-    name: 'Midnight Rose',
-    description: 'A seductive blend of dark rose and vanilla',
+    id: "3",
+    name: "Dynasty",
+    description: "A seductive blend of dark rose and vanilla",
     price: 129.99,
-    image: 'https://images.unsplash.com/photo-1588405748880-12d1d2a59f75?auto=format&fit=crop&q=80&w=800',
-    category: 'floral'
+    image: Dynasty,
+    category: "floral",
   },
   {
-    id: '4',
-    name: 'Ocean Breeze',
-    description: 'Fresh marine notes with a hint of citrus',
+    id: "4",
+    name: "Genevieve",
+    description: "Fresh marine notes with a hint of citrus",
     price: 99.99,
-    image: 'https://images.unsplash.com/photo-1594035910387-fea47794261f?auto=format&fit=crop&q=80&w=800',
-    category: 'fresh'
+    image: Genevieve,
+    category: "fresh",
   },
   {
-    id: '5',
-    name: 'Velvet Oud',
-    description: 'Rich and mysterious oriental fragrance',
+    id: "5",
+    name: "Midnight",
+    description: "Rich and mysterious oriental fragrance",
     price: 159.99,
-    image: 'https://images.unsplash.com/photo-1595425970377-c9703cf48b6f?auto=format&fit=crop&q=80&w=800',
-    category: 'oriental'
-  }
+    image: Midnight,
+    category: "oriental",
+  },
+  {
+    id: "6",
+    name: "Mystique",
+    description: "Rich and mysterious oriental fragrance",
+    price: 159.99,
+    image: Mystique,
+    category: "oriental",
+  },
+  {
+    id: "7",
+    name: "Zephyr",
+    description: "Rich and mysterious oriental fragrance",
+    price: 159.99,
+    image: Zephyr,
+    category: "oriental",
+  },
 ];
 
 const Catalog: React.FC = () => {
@@ -65,11 +88,17 @@ const Catalog: React.FC = () => {
               className="bg-white rounded-lg shadow-lg overflow-hidden"
             >
               <Link to={`/product/${product.id}`}>
-                <img src={product.image} alt={product.name} className="w-full h-64 object-cover" />
+                <img
+                  src={product.image}
+                  alt={product.name}
+                  className="w-full h-64 object-cover"
+                />
               </Link>
               <div className="p-6">
                 <Link to={`/product/${product.id}`}>
-                  <h2 className="text-2xl font-semibold mb-2">{product.name}</h2>
+                  <h2 className="text-2xl font-semibold mb-2">
+                    {product.name}
+                  </h2>
                 </Link>
                 <p className="text-gray-600 mb-4">{product.description}</p>
                 <div className="flex items-center justify-between">

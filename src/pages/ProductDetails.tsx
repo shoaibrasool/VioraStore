@@ -1,42 +1,81 @@
-import React from 'react';
-import { useParams } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { ShoppingCart } from 'lucide-react';
-import { useCartStore } from '../store/cartStore';
-import { Product } from '../types';
+import React from "react";
+import { useParams } from "react-router-dom";
+import { motion } from "framer-motion";
+import { ShoppingCart } from "lucide-react";
+import { useCartStore } from "../store/cartStore";
+import { Product } from "../types";
+import Sigma from "../assets/images/Sigma.jpeg";
+import DarkRebel from "../assets/images/Dark Rebel.jpeg";
+import Dynasty from "../assets/images/Dynasty.jpeg";
+import Genevieve from "../assets/images/Genevieve.jpeg";
+import Midnight from "../assets/images/Midnight.jpeg";
+import Mystique from "../assets/images/Mystique.jpeg";
+import Zephyr from "../assets/images/Zephyr.jpeg";
 
 const products: Product[] = [
   {
-    id: '1',
-    name: 'Midnight Rose',
-    description: 'A seductive blend of dark rose and vanilla, this enchanting fragrance opens with rich damascena rose, intertwined with sweet vanilla bourbon and warm amber. The heart reveals subtle notes of patchouli and dark berries, while the base settles into a mesmerizing mix of musk and woody accords.',
+    id: "1",
+    name: "Sigma",
+    description: "A seductive blend of dark rose and vanilla",
     price: 129.99,
-    image: 'https://images.unsplash.com/photo-1588405748880-12d1d2a59f75?auto=format&fit=crop&q=80&w=800',
-    category: 'floral'
+    image: Sigma,
+    category: "floral",
   },
   {
-    id: '2',
-    name: 'Ocean Breeze',
-    description: 'Fresh marine notes blend seamlessly with citrus in this invigorating scent. Top notes of bergamot and sea salt give way to a heart of lavender and white florals. The base notes of driftwood and clean musk create a lasting impression of a day spent by the ocean.',
+    id: "2",
+    name: "Dark Rebel",
+    description: "Fresh marine notes with a hint of citrus",
     price: 99.99,
-    image: 'https://images.unsplash.com/photo-1594035910387-fea47794261f?auto=format&fit=crop&q=80&w=800',
-    category: 'fresh'
+    image: DarkRebel,
+    category: "fresh",
   },
   {
-    id: '3',
-    name: 'Velvet Oud',
-    description: 'A rich and mysterious oriental fragrance that combines precious oud wood with warm spices. The opening is an intense blend of saffron and cardamom, leading to a heart of rose and oud. The base notes of vanilla, amber, and sandalwood create a long-lasting, luxurious trail.',
+    id: "3",
+    name: "Dynasty",
+    description: "A seductive blend of dark rose and vanilla",
+    price: 129.99,
+    image: Dynasty,
+    category: "floral",
+  },
+  {
+    id: "4",
+    name: "Genevieve",
+    description: "Fresh marine notes with a hint of citrus",
+    price: 99.99,
+    image: Genevieve,
+    category: "fresh",
+  },
+  {
+    id: "5",
+    name: "Midnight",
+    description: "Rich and mysterious oriental fragrance",
     price: 159.99,
-    image: 'https://images.unsplash.com/photo-1595425970377-c9703cf48b6f?auto=format&fit=crop&q=80&w=800',
-    category: 'oriental'
-  }
+    image: Midnight,
+    category: "oriental",
+  },
+  {
+    id: "6",
+    name: "Mystique",
+    description: "Rich and mysterious oriental fragrance",
+    price: 159.99,
+    image: Mystique,
+    category: "oriental",
+  },
+  {
+    id: "7",
+    name: "Zephyr",
+    description: "Rich and mysterious oriental fragrance",
+    price: 159.99,
+    image: Zephyr,
+    category: "oriental",
+  },
 ];
 
 const ProductDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const addItem = useCartStore((state) => state.addItem);
-  
-  const product = products.find(p => p.id === id);
+
+  const product = products.find((p) => p.id === id);
 
   if (!product) {
     return (
@@ -69,8 +108,10 @@ const ProductDetails: React.FC = () => {
             <h1 className="text-4xl font-bold">{product.name}</h1>
             <p className="text-3xl font-semibold">${product.price}</p>
             <div className="h-px bg-gray-200" />
-            <p className="text-gray-600 leading-relaxed">{product.description}</p>
-            
+            <p className="text-gray-600 leading-relaxed">
+              {product.description}
+            </p>
+
             <div className="space-y-4">
               <h3 className="text-lg font-semibold">Key Notes:</h3>
               <ul className="list-disc list-inside text-gray-600 space-y-2">
