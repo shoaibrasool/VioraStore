@@ -191,14 +191,14 @@ const Checkout: React.FC = () => {
                     </div>
                   </div>
                   <p className="font-medium">
-                    ${(item.price * item.quantity).toFixed(2)}
+                    {(item.price * item.quantity).toFixed(2)} Rs
                   </p>
                 </div>
               ))}
               <div className="h-px bg-gray-200 my-4" />
               <div className="flex justify-between font-semibold">
                 <span>Total</span>
-                <span>${total.toFixed(2)}</span>
+                <span>{total.toFixed(2)} Rs</span>
               </div>
             </div>
           </motion.div>

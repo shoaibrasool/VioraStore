@@ -2,73 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { ShoppingCart } from "lucide-react";
 import { useCartStore } from "../store/cartStore";
-import { Product } from "../types";
-import Sigma from "../assets/images/Sigma.jpeg";
-import DarkRebel from "../assets/images/Dark Rebel.jpeg";
-import Dynasty from "../assets/images/Dynasty.jpeg";
-import Genevieve from "../assets/images/Genevieve.jpeg";
-import Midnight from "../assets/images/Midnight.jpeg";
-import Mystique from "../assets/images/Mystique.jpeg";
-import Zephyr from "../assets/images/Zephyr.jpeg";
-
-const products: Product[] = [
-  {
-    id: "1",
-    name: "Sigma",
-    description: "A seductive blend of dark rose and vanilla",
-    price: 129.99,
-    image: Sigma,
-    category: "floral",
-  },
-  {
-    id: "2",
-    name: "Dark Rebel",
-    description: "Fresh marine notes with a hint of citrus",
-    price: 99.99,
-    image: DarkRebel,
-    category: "fresh",
-  },
-  {
-    id: "3",
-    name: "Dynasty",
-    description: "A seductive blend of dark rose and vanilla",
-    price: 129.99,
-    image: Dynasty,
-    category: "floral",
-  },
-  {
-    id: "4",
-    name: "Genevieve",
-    description: "Fresh marine notes with a hint of citrus",
-    price: 99.99,
-    image: Genevieve,
-    category: "fresh",
-  },
-  {
-    id: "5",
-    name: "Midnight",
-    description: "Rich and mysterious oriental fragrance",
-    price: 159.99,
-    image: Midnight,
-    category: "oriental",
-  },
-  {
-    id: "6",
-    name: "Mystique",
-    description: "Rich and mysterious oriental fragrance",
-    price: 159.99,
-    image: Mystique,
-    category: "oriental",
-  },
-  {
-    id: "7",
-    name: "Zephyr",
-    description: "Rich and mysterious oriental fragrance",
-    price: 159.99,
-    image: Zephyr,
-    category: "oriental",
-  },
-];
+import products from "@/components/products";
 
 const Home: React.FC = () => {
   const addItem = useCartStore((state) => state.addItem);
@@ -117,7 +51,7 @@ const Home: React.FC = () => {
               />
               <div className="p-4">
                 <h3 className="text-xl font-semibold mb-2">{product.name}</h3>
-                <p className="text-gray-600 mb-4">${product.price}</p>
+                <p className="text-gray-600 mb-4">{product.price} Rs</p>
                 <button
                   onClick={() => addItem({ ...product, quantity: 1 })}
                   className="w-full bg-black text-white py-2 px-4 rounded-md flex items-center justify-center gap-2 hover:bg-gray-800 transition-colors"
