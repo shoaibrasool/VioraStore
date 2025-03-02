@@ -47,7 +47,7 @@ const Navbar: React.FC<NavbarProps> = ({ onMenuClick }) => {
       {/* Mini Navbar */}
       <div className="fixed top-16 left-0 right-0 h-8 bg-black flex items-center justify-center z-40">
         <p className="text-white text-sm font-medium">
-          Free shipping over 2000rs
+          Free shipping over 3000rs
         </p>
       </div>
     </>

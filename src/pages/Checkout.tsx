@@ -26,29 +26,31 @@ const Checkout: React.FC = () => {
       name: formData.fullName,
       email: formData.email,
       total: total.toFixed(2),
+      address: formData.address,
+      phone: formData.phone,
       items: items
         .map(
-          (item) => `<li>${item.name} - ${item.quantity} x $${item.price}</li>`
+          (item) => `<li>${item.name} - ${item.quantity} x ${item.price}Rs</li>`
         )
         .join(""),
     };
 
     emailjs
-    .send(
-      "service_f4retmq", // Your Service ID
-      "template_d0ds4tn", // Your Template ID
-      emailParams,
-      "SxnnPYIe4bYqUhfCp" // Your Public Key
-    )
-    .then((response) => {
-      console.log("Email sent successfully:", response);
-      alert("Order placed successfully! Confirmation email sent.");
-      clearCart();
-    })
-    .catch((error) => {
-      console.error("Email send error:", error);
-      alert("Order placed, but email could not be sent.");
-    });
+      .send(
+        "service_f4retmq", // Your Service ID
+        "template_d0ds4tn", // Your Template ID
+        emailParams,
+        "SxnnPYIe4bYqUhfCp" // Your Public Key
+      )
+      .then((response) => {
+        console.log("Email sent successfully:", response);
+        alert("Order placed successfully! Confirmation email sent.");
+        clearCart();
+      })
+      .catch((error) => {
+        console.error("Email send error:", error);
+        alert("Order placed, but email could not be sent.");
+      });
 
     // Here you would typically send the order to your backend
     console.log("Order submitted:", orderDetails);
@@ -57,7 +59,6 @@ const Checkout: React.FC = () => {
     clearCart();
 
     // Redirect to a success page or show a success message
-    alert("Order placed successfully!");
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
