@@ -1,11 +1,15 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { useCartStore } from "../store/cartStore";
-import { OrderDetails } from "../types";
 import emailjs from "@emailjs/browser";
+import { Link } from "react-router-dom";
+import { AppDispatch, RootState } from "@/store/cartStore";
+import { useDispatch, useSelector } from "react-redux";
+import { OrderDetails } from "@/types";
+import { clearCart } from "@/slices/cartSlice";
 
 const Checkout: React.FC = () => {
-  const { items, total, clearCart } = useCartStore();
+  const dispatch = useDispatch<AppDispatch>();
+  const { items, total } = useSelector((state: RootState) => state.cart);
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
@@ -30,7 +34,7 @@ const Checkout: React.FC = () => {
       phone: formData.phone,
       items: items
         .map(
-          (item) => `<li>${item.name} - ${item.quantity} x ${item.price}Rs</li>`
+          (item: { name: any; quantity: any; price: any; }) => `<li>${item.name} - ${item.quantity} x ${item.price}Rs</li>`
         )
         .join(""),
     };
@@ -45,20 +49,13 @@ const Checkout: React.FC = () => {
       .then((response) => {
         console.log("Email sent successfully:", response);
         alert("Order placed successfully! Confirmation email sent.");
-        clearCart();
       })
       .catch((error) => {
         console.error("Email send error:", error);
         alert("Order placed, but email could not be sent.");
       });
-
-    // Here you would typically send the order to your backend
+      dispatch(clearCart());
     console.log("Order submitted:", orderDetails);
-
-    // Clear the cart after successful order
-    clearCart();
-
-    // Redirect to a success page or show a success message
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -71,6 +68,9 @@ const Checkout: React.FC = () => {
   return (
     <div className="min-h-screen py-20 px-4">
       <div className="max-w-4xl mx-auto">
+        <Link to="/catalog" className="text-blue-500 hover:underline mb-4 inline-block">
+          &larr; Back to Catalog
+        </Link>
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -173,7 +173,7 @@ const Checkout: React.FC = () => {
           >
             <h2 className="text-xl font-semibold mb-4">Order Summary</h2>
             <div className="space-y-4">
-              {items.map((item) => (
+              {items.map((item: any) => (
                 <div
                   key={item.id}
                   className="flex justify-between items-center"

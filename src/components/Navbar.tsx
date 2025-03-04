@@ -1,16 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Menu, ShoppingCart } from "lucide-react";
-import { useCartStore } from "../store/cartStore";
+import { useSelector } from "react-redux";
 import { motion } from "framer-motion";
-import { theme } from "../constants/theme";
+import { RootState } from "@/store/cartStore";
+import { theme } from "@/constants/theme";
 
 interface NavbarProps {
   onMenuClick: () => void;
 }
 
 const Navbar: React.FC<NavbarProps> = ({ onMenuClick }) => {
-  const items = useCartStore((state) => state.items);
+  const items = useSelector((state: RootState) => state.cart.items);
   const totalItems = items.reduce((acc, item) => acc + item.quantity, 0);
 
   return (
@@ -21,7 +22,7 @@ const Navbar: React.FC<NavbarProps> = ({ onMenuClick }) => {
             whileTap={{ scale: 0.95 }}
             onClick={onMenuClick}
             className="p-2"
-          > 
+          >
             <Menu className="w-6 h-6" color={theme.colors.primary} />
           </motion.button>
 

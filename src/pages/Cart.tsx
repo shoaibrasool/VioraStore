@@ -2,10 +2,13 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Trash2, Plus, Minus } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { useCartStore } from '../store/cartStore';
+import { useSelector, useDispatch } from 'react-redux';
+import { AppDispatch, RootState } from '@/store/cartStore';
+import { removeItem, updateQuantity } from '@/slices/cartSlice';
 
 const Cart: React.FC = () => {
-  const { items, total, removeItem, updateQuantity } = useCartStore();
+  const dispatch = useDispatch<AppDispatch>();
+  const { items, total } = useSelector((state: RootState) => state.cart);
 
   if (items.length === 0) {
     return (
@@ -48,7 +51,7 @@ const Cart: React.FC = () => {
                         <p className="text-gray-600">{item.price} Rs</p>
                       </div>
                       <button
-                        onClick={() => removeItem(item.id)}
+                        onClick={() => dispatch(removeItem(item.id))}
                         className="text-gray-400 hover:text-red-500 transition-colors"
                       >
                         <Trash2 size={20} />
@@ -56,14 +59,14 @@ const Cart: React.FC = () => {
                     </div>
                     <div className="mt-4 flex items-center gap-2">
                       <button
-                        onClick={() => updateQuantity(item.id, Math.max(0, item.quantity - 1))}
+                        onClick={() => dispatch(updateQuantity({ id: item.id, quantity: Math.max(0, item.quantity - 1) }))}
                         className="p-1 rounded-md hover:bg-gray-100"
                       >
                         <Minus size={16} />
                       </button>
                       <span className="w-8 text-center">{item.quantity}</span>
                       <button
-                        onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                        onClick={() => dispatch(updateQuantity({ id: item.id, quantity: item.quantity + 1 }))}
                         className="p-1 rounded-md hover:bg-gray-100"
                       >
                         <Plus size={16} />

@@ -4,6 +4,7 @@ import Navbar from './components/Navbar';
 import Sidebar from './components/Sidebar';
 import Home from './pages/Home';
 import Catalog from './pages/Catalog';
+import SellerPage from './pages/SellerPage';
 import Contact from './pages/Contact';
 import About from './pages/About';
 import ProductDetails from './pages/ProductDetails';
@@ -32,6 +33,7 @@ function App() {
             <Route path="/product/:id" element={<ProductDetails />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/checkout" element={<Checkout />} />
+            <Route path="/seller" element={<SellerPage />} />
           </Routes>
         </main>
       </div>

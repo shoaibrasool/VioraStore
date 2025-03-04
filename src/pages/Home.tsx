@@ -1,11 +1,13 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { ShoppingCart } from "lucide-react";
-import { useCartStore } from "../store/cartStore";
+import { useDispatch } from "react-redux";
 import products from "@/components/products";
+import { Link } from "react-router-dom";
+import { addItem } from "@/slices/cartSlice";
 
 const Home: React.FC = () => {
-  const addItem = useCartStore((state) => state.addItem);
+  const dispatch = useDispatch();
 
   return (
     <div className="min-h-screen">
@@ -53,7 +55,7 @@ const Home: React.FC = () => {
                 <h3 className="text-xl font-semibold mb-2">{product.name}</h3>
                 <p className="text-gray-600 mb-4">{product.price} Rs</p>
                 <button
-                  onClick={() => addItem({ ...product, quantity: 1 })}
+                  onClick={() => dispatch(addItem({ ...product, quantity: 1 }))}
                   className="w-full bg-black text-white py-2 px-4 rounded-md flex items-center justify-center gap-2 hover:bg-gray-800 transition-colors"
                 >
                   <ShoppingCart size={20} />
@@ -62,6 +64,11 @@ const Home: React.FC = () => {
               </div>
             </motion.div>
           ))}
+        </div>
+        <div className="text-center mt-8">
+          <Link to="/catalog" className="text-blue-500 hover:underline">
+            View All Products
+          </Link>
         </div>
       </div>
     </div>

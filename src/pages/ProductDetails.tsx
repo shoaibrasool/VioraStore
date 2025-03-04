@@ -1,13 +1,14 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ShoppingCart } from "lucide-react";
-import { useCartStore } from "../store/cartStore";
+import { useDispatch } from "react-redux";
 import products from "@/components/products";
+import { addItem } from "@/slices/cartSlice";
 
 const ProductDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>();
-  const addItem = useCartStore((state) => state.addItem);
+  const dispatch = useDispatch();
 
   const product = products.find((p) => p.id === id);
 
@@ -22,6 +23,9 @@ const ProductDetails: React.FC = () => {
   return (
     <div className="min-h-screen py-20 px-4">
       <div className="max-w-6xl mx-auto">
+        <Link to="/catalog" className="text-blue-500 hover:underline mb-4 inline-block">
+          &larr; Back to Catalog
+        </Link>
         <div className="grid md:grid-cols-2 gap-12">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
@@ -56,7 +60,7 @@ const ProductDetails: React.FC = () => {
             </div>
 
             <button
-              onClick={() => addItem({ ...product, quantity: 1 })}
+              onClick={() => dispatch(addItem({ ...product, quantity: 1 }))}
               className="w-full bg-black text-white py-3 px-6 rounded-md flex items-center justify-center gap-2 hover:bg-gray-800 transition-colors"
             >
               <ShoppingCart size={20} />
