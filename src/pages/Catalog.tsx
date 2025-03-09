@@ -1,14 +1,32 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { motion } from "framer-motion";
 import { ShoppingCart } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import products from "@/components/products";
 import { addItem } from "@/slices/cartSlice";
+import { collection, db, getDocs } from "@/config/firebase";
 
 const Catalog: React.FC = () => {
   const dispatch = useDispatch();
 
+  const getProducts = async () => {
+    try {
+      const productsCollection = collection(db, "products");
+      const productSnapshot = await getDocs(productsCollection);
+      const productList = productSnapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data()
+      }));
+  
+      console.log(productList);  // Log the products to the console
+    } catch (error) {
+      console.error("Error getting products: ", error);
+    }
+  };
+  useEffect(()=>{
+    getProducts()
+  })
   return (
     <div className="min-h-screen py-20 px-4">
       <div className="max-w-7xl mx-auto">
