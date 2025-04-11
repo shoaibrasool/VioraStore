@@ -4,7 +4,7 @@ import emailjs from "@emailjs/browser";
 import { Link, useNavigate } from "react-router-dom";
 import { AppDispatch, RootState } from "@/store/cartStore";
 import { useDispatch, useSelector } from "react-redux";
-import { OrderDetails } from "@/types";
+// import { OrderDetails } from "@/types";
 import { clearCart } from "@/slices/cartSlice";
 
 const Checkout: React.FC = () => {
@@ -26,11 +26,11 @@ const Checkout: React.FC = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    const orderDetails: OrderDetails = {
-      ...formData,
-      items,
-      total,
-    };
+    // const orderDetails: OrderDetails = {
+    //   ...formData,
+    //   items,
+    //   total,
+    // };
 
     const emailParams = {
       name: formData.fullName,
