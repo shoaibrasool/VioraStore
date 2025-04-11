@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import emailjs from "@emailjs/browser";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AppDispatch, RootState } from "@/store/cartStore";
 import { useDispatch, useSelector } from "react-redux";
 import { OrderDetails } from "@/types";
@@ -9,7 +9,13 @@ import { clearCart } from "@/slices/cartSlice";
 
 const Checkout: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const { items, total } = useSelector((state: RootState) => state.cart);
+  const navigate = useNavigate();
+  const { items } = useSelector((state: RootState) => state.cart);
+  const [showPopup, setShowPopup] = useState(false);
+
+  // Calculate total dynamically
+  const total = items.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
@@ -34,7 +40,7 @@ const Checkout: React.FC = () => {
       phone: formData.phone,
       items: items
         .map(
-          (item: { name: any; quantity: any; price: any; }) => `<li>${item.name} - ${item.quantity} x ${item.price}Rs</li>`
+          (item) => `<li>${item.name} - ${item.quantity} x ${item.price}Rs = ${(item.quantity * item.price).toFixed(2)}Rs</li>`
         )
         .join(""),
     };
@@ -48,14 +54,18 @@ const Checkout: React.FC = () => {
       )
       .then((response) => {
         console.log("Email sent successfully:", response);
-        alert("Order placed successfully! Confirmation email sent.");
+        dispatch(clearCart());
+        setShowPopup(true);
       })
       .catch((error) => {
         console.error("Email send error:", error);
         alert("Order placed, but email could not be sent.");
       });
-      dispatch(clearCart());
-    console.log("Order submitted:", orderDetails);
+  };
+
+  const handlePopupClose = () => {
+    setShowPopup(false);
+    navigate('/catalog');
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -66,18 +76,22 @@ const Checkout: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen py-20 px-4">
+    <div className="min-h-screen py-12 px-4 relative">
       <div className="max-w-4xl mx-auto">
-        <Link to="/catalog" className="text-blue-500 hover:underline mb-4 inline-block">
-          &larr; Back to Catalog
+        <Link
+          to="/catalog"
+          className="inline-flex items-center px-4 py-2 bg-black text-white rounded-md hover:bg-gray-800 transition-colors"
+        >
+          <span className="mr-2">&larr;</span> Back to Catalog
         </Link>
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-3xl font-bold mb-8 text-center"
+          className="text-4xl font-bold flex-1 text-center mt-8"
         >
           Checkout
         </motion.h1>
+        <div className="w-[116px]"></div>
 
         <div className="grid md:grid-cols-2 gap-8">
           <motion.form
@@ -180,7 +194,7 @@ const Checkout: React.FC = () => {
                 >
                   <div className="flex items-center gap-4">
                     <img
-                      src={item.image}
+                      src={item.imageUrl}
                       alt={item.name}
                       className="w-16 h-16 object-cover rounded-md"
                     />
@@ -205,6 +219,25 @@ const Checkout: React.FC = () => {
           </motion.div>
         </div>
       </div>
+
+      {showPopup && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <motion.div
+            initial={{ scale: 0.5, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            className="bg-white p-6 rounded-lg shadow-xl max-w-md w-full mx-4"
+          >
+            <h2 className="text-xl font-bold mb-4">Order Placed Successfully!</h2>
+            <p className="text-gray-600 mb-6">A confirmation email has been sent to your email address.</p>
+            <button
+              onClick={handlePopupClose}
+              className="w-full bg-black text-white py-3 px-6 rounded-md hover:bg-gray-800 transition-colors"
+            >
+              OK
+            </button>
+          </motion.div>
+        </div>
+      )}
     </div>
   );
 };

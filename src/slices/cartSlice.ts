@@ -3,12 +3,10 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface CartState {
     items: CartItem[];
-    total: number;
   }
   
   const initialState: CartState = {
     items: [],
-    total: 0,
   };
   
   const cartSlice = createSlice({
@@ -22,25 +20,22 @@ interface CartState {
         } else {
           state.items.push({ ...action.payload, quantity: 1 });
         }
-        state.total += action.payload.price;
       },
       removeItem: (state, action: PayloadAction<string>) => {
-        const item = state.items.find((i) => i.id === action.payload);
-        if (item) {
-          state.total -= item.price * item.quantity;
-          state.items = state.items.filter((i) => i.id !== action.payload);
-        }
+        state.items = state.items.filter((i) => i.id !== action.payload);
       },
       updateQuantity: (state, action: PayloadAction<{ id: string; quantity: number }>) => {
         const item = state.items.find((i) => i.id === action.payload.id);
         if (item) {
-          state.total += (action.payload.quantity - item.quantity) * item.price;
-          item.quantity = action.payload.quantity;
+          if (action.payload.quantity <= 0) {
+            state.items = state.items.filter((i) => i.id !== action.payload.id);
+          } else {
+            item.quantity = action.payload.quantity;
+          }
         }
       },
       clearCart: (state) => {
         state.items = [];
-        state.total = 0;
       },
     },
   });

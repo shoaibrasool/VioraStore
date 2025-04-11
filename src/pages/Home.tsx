@@ -38,7 +38,7 @@ const Home: React.FC = () => {
           Featured Collections
         </h2>
         <div className="flex overflow-x-auto gap-6 pb-4 hide-scrollbar">
-          {products.map((product) => (
+          {products().map((product) => (
             <motion.div
               key={product.id}
               initial={{ opacity: 0, x: 20 }}
@@ -47,7 +47,7 @@ const Home: React.FC = () => {
               className="min-w-[280px] bg-white rounded-lg shadow-lg overflow-hidden"
             >
               <img
-                src={product.image}
+                src={product.imageUrl}
                 alt={product.name}
                 className="w-full h-48 object-cover"
               />
@@ -66,7 +66,10 @@ const Home: React.FC = () => {
           ))}
         </div>
         <div className="text-center mt-8">
-          <Link to="/catalog" className="text-blue-500 hover:underline">
+          <Link
+            to="/catalog"
+            className="inline-block bg-black text-white py-2 px-6 rounded-md hover:bg-gray-800 transition-colors"
+          >
             View All Products
           </Link>
         </div>
