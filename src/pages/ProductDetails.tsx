@@ -10,7 +10,7 @@ const ProductDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const dispatch = useDispatch();
 
-  const product = products.find((p) => p.id === id);
+  const product = products().find((p) => p.id === id);
 
   if (!product) {
     return (
@@ -32,7 +32,7 @@ const ProductDetails: React.FC = () => {
             animate={{ opacity: 1, x: 0 }}
           >
             <img
-              src={product.image}
+              src={product.imageUrl}
               alt={product.name}
               className="w-full h-[500px] object-cover rounded-lg shadow-lg"
             />

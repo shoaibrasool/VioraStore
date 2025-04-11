@@ -3,9 +3,10 @@ export interface Product {
   name: string;
   description: string;
   price: number;
-  image: string;
-  category: string;
+  imageUrl: string;
+  category?: string;
 }
+
 
 export interface CartItem extends Product {
   quantity: number;

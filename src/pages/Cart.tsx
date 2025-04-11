@@ -8,7 +8,11 @@ import { removeItem, updateQuantity } from '@/slices/cartSlice';
 
 const Cart: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const { items, total } = useSelector((state: RootState) => state.cart);
+  const { items } = useSelector((state: RootState) => state.cart);
+  
+  // Calculate total dynamically
+  const total = items.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+  const formattedTotal = total.toFixed(2);
 
   if (items.length === 0) {
     return (
@@ -40,7 +44,7 @@ const Cart: React.FC = () => {
               >
                 <div className="flex gap-4">
                   <img
-                    src={item.image}
+                    src={item.imageUrl}
                     alt={item.name}
                     className="w-24 h-24 object-cover rounded-md"
                   />
@@ -87,7 +91,7 @@ const Cart: React.FC = () => {
             <div className="space-y-2 mb-4">
               <div className="flex justify-between">
                 <span>Subtotal</span>
-                <span>{total.toFixed(2)} Rs</span>
+                <span>{formattedTotal} Rs</span>
               </div>
               <div className="flex justify-between">
                 <span>Shipping</span>
@@ -96,7 +100,7 @@ const Cart: React.FC = () => {
               <div className="h-px bg-gray-200 my-4" />
               <div className="flex justify-between font-semibold">
                 <span>Total</span>
-                <span>{total.toFixed(2)} Rs</span>
+                <span>{formattedTotal} Rs</span>
               </div>
             </div>
             <Link

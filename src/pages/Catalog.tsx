@@ -5,16 +5,18 @@ import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import products from "@/components/products";
 import { addItem } from "@/slices/cartSlice";
+import { Product } from "@/types";
 
 const Catalog: React.FC = () => {
   const dispatch = useDispatch();
+  const productsList = products();
 
   return (
     <div className="min-h-screen py-20 px-4">
       <div className="max-w-7xl mx-auto">
         <h1 className="text-4xl font-bold mb-12 text-center">Our Collection</h1>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {products.map((product) => (
+          {productsList.map((product: Product) => (
             <motion.div
               key={product.id}
               initial={{ opacity: 0, y: 20 }}
@@ -24,7 +26,7 @@ const Catalog: React.FC = () => {
             >
               <Link to={`/product/${product.id}`}>
                 <img
-                  src={product.image}
+                  src={product.imageUrl}
                   alt={product.name}
                   className="w-full h-64 object-cover"
                 />
